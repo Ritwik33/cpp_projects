@@ -64,6 +64,13 @@ int main() {
     st.erase(st.find(5),st.end());
     auto itr = st.find(-2);
     st.erase(itr);
+    st.insert(10);
+    st.insert(15);
+    st.insert(25);
+    st.insert(100);
+    st.insert(13);
+    st.insert(55);
+    st.erase(st.find(10),st.find(55));// deletes elements in a first included last excluded manner
     for(auto it=st.begin();it!=st.end();it++) cout<<*it<<" ";
     
     return 0;
