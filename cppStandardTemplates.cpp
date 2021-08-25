@@ -153,14 +153,91 @@ int main() {
     q.push(2);// adds an element to the last position of the queue...
     q.push(3);
     q.push(5);
-    q.pop();// deletes the first element in the queue...
+    q.push(10);
+    q.push(17);
+    q.push(18);
+    q.push(22);
+    cout<<endl<<endl;
+    int n = q.size();// returns the size of the queue...
+    cout<<endl<<q.empty()<<endl;// q.empty() returns 1 if queue is empty....
+    while(!q.empty()) {
+        cout<<q.front()<<" ";
+        q.pop();// removes an element from the front of the queue...
+    }
+    cout<<endl<<q.empty()<<endl;
 
 
+    //stacks
+    //LIFO-datastructure...
+
+    stack<int> stk;
+    stk.push(2);// adds an element to the top of the stack...
+    stk.push(5);
+    stk.push(150);
+    stk.push(55);
+    cout<<stk.size()<<endl;
+    while(!stk.empty()) {// returns 1 if stack is empty...
+        cout<<stk.top()<<endl;// returns the topmost element of the stack...
+        stk.pop();// removes an element from the top of the stack...
+    }
+    cout<<stk.size()<<endl;// returns the size of the stack...
 
 
+    //priority_queue
+    //stores elements in a descending order fashion...
+    // also stores duplicate elements...
+    priority_queue<int> pq;// max-heap datastructure...
+    pq.push(14);// pushes an element in a fashion that it is in order...
+    pq.push(1);
+    pq.push(100);
+    pq.push(1);
+    pq.push(3);
+    pq.push(-3);
+    cout<<endl<<endl;
+    while(!pq.empty()) {
+        cout<<pq.top()<<" ";// returns the element at the front...
+        pq.pop();// removes an element from the front...
+    }
+    cout<<endl<<endl<<pq.empty()<<endl;// returns 1 if priority_queue is empty...
 
+    // min-heap-ds...
+    // order is opposite to that of max-heap-ds...
+    priority_queue<int, vector<int>, greater<int>> pqg;// greater<int> is a comparator that sorts a collection in the ascending order, just opposite to that is less<int>...
+    pqg.push(100);
+    pqg.push(1);
+    pqg.push(50);
+    pqg.push(-2000);
+    pqg.push(3);
+    pqg.push(14);
+    pqg.push(121);
+    cout<<endl<<endl;
+    while(!pqg.empty()) {
+        cout<<pqg.top()<<" ";
+        pqg.pop();
+    }
 
+    //list
+    //two way data structure...
+    list<int> ls;
+    ls.push_back(1);
+    ls.push_front(12);
+    ls.pop_back();
+    ls.pop_front();
+    ls.size();
+    ls.empty();
 
-
+    vector<int> v;
+    v.push_back(1);
+    v.push_back(3);
+    v.push_back(2);
+    v.push_back(4);
+    v.push_back(6);
+    cout<<endl<<endl;
+    //sort(v.begin(), v.end());// ascending order..
+    //sort(v.begin(), v.end(), less<int>());// ascending order...
+    sort(v.begin(), v.end(), greater<int>());// descending order...
+    for(auto it:v) cout<<it<<" ";
     return 0;
+
 }
+
