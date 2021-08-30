@@ -10,7 +10,7 @@ bool nQueens(int col, int n, vector<vector<char>>& chess, vector<char>& rowHash,
     if(col == n) {
         for(int i = 0;i<n;i++) {
             for(int j = 0;j<n;j++) cout << chess[i][j] << "  ";
-            cout << endl << endl;
+            cout << "\n\n";
         }
         return true;
     }
