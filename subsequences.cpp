@@ -5,7 +5,7 @@ void printSubsequences(int ind, vector<int> &ds, int n, int arr[]) {
 
     // Print the corresponding sub-sequence...
     if(ind == n) {
-        for(auto it:ds) cout<<it<<" ";
+        for(auto it:ds) cout << it << " ";
         cout << endl;
         return;
     }
