@@ -3,22 +3,25 @@ using namespace std;
 
 int main() {
     int n;
+    cout << "Enter size of the array: ";
     cin >> n;
     vector<int> arr(n, 0);
+    cout << "Enter contents:\n";
     for(int i = 0;i<n;i++) cin >> arr[i];
     vector<int> prefix(n, 0);
-    int temp = 0;
     for(int i = 0;i<n;i++) {
-        prefix[i] = arr[i] + temp;
-        temp = arr[i];
+        if(i == 0) prefix[i] = arr[i];
+        else {
+            prefix[i] = prefix[i-1] + arr[i];
+        }
     }
-    
-    int q;
-    cin >> q;
+    cout << "The prefix array is:\n";
+    for(auto it:prefix) cout << it << " ";
+    cout << "\n";
     int l, r;
-    while(q--) {
-        cin >> l >> r;
-        cout << prefix[r] - prefix[l-1] << "\n";
-    }
+    cout << "Enter l and r: ";
+    cin >> l >> r;
+    cout << "The result is: ";
+    cout << prefix[r] - prefix[l-1];
     return 0;
 }
