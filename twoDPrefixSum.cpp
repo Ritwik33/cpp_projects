@@ -40,6 +40,7 @@ int main() {
     formPrefix(prefix, arr);
     cout << "The prefix matrix is:\n";
     display(prefix);
+    /*
     int q;
     cout << "Enter number of queries: ";
     cin >> q;
@@ -52,5 +53,6 @@ int main() {
         cin >> x2 >> y2;
         cout << "The sum is: " << sum(x1, y1, x2, y2, prefix) << "\n";  
     }
+    */
     return 0;
 }
