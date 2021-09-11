@@ -9,6 +9,6 @@ int main() {
     int x;
     cin >> x;
     cout << lower_bound(arr.begin(), arr.end(), x)-arr.begin() << endl;
-    cout << upper_bound(arr.begin(), arr.end(), x)-arr.begin() << endl;
+    //cout << upper_bound(arr.begin(), arr.end(), x)-arr.begin() << endl;
     return 0;
 }
