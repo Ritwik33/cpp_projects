@@ -12,5 +12,5 @@ int main() {
     cin >> a >> b;
     cout <<"The gcd is: "<< gcd(a,b) << endl; // recursive version of gcd
     cout << __gcd(a,b) << endl; // stl function for gcd
-    return 0;
+    return 0; 
 }
