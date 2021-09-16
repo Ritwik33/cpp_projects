@@ -117,7 +117,7 @@ int main() {
     cout<<endl<<endl;
     for(auto it:ms) cout<<it<<" ";
     cout<<endl<<ms.count(22)<<endl;
-    cout<<ms.count(1)<<endl;
+    cout<<ms.count(1)<<endl; // counts total occurences of val
     cout<<ms.count(100)<<endl;
     //ms.find(val) always points to the first occurence of val
     ms.erase(1);//deletes all occurences of 1
