@@ -40,14 +40,12 @@ int main() {
     vi path2;
     dfs(1, node1, path1);
     dfs(1, node2, path2);
-    int i = 0, j = 0, loc = -1;
+    int i = 0, j = 0, lca;
     while(path1[i] == path2[j]) {
-        loc++;
+        lca = path1[i] = path2[j];
         i++;
         j++;
     }
-    if(loc == min(path1.size(), path2.size()) - 1) loc--;
-    int lca = path1[loc] = path2[loc];
     cout << lca << "\n";
     return 0;
 }
