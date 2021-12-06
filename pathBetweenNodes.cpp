@@ -31,11 +31,11 @@ bool dfs(int source, int destination) {
     }
     for(auto it:adj[source]) {
         if(!visited[it]) {
-            if(dfs(it, destination) == true) return true;
-            visited[source] = false;
-            path.pop_back();
+            if(dfs(it, destination)) return true;
         }
-    }   
+    }
+    visited[source] = false;
+    path.pop_back();   
     return false;
 }
 
