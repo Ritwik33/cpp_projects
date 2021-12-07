@@ -18,8 +18,7 @@ void inputTree() {
 }
 
 int visited[100005];
-vi path;
-bool dfs(int source, int destination) {
+bool dfs(int source, int destination, vi& path) {
     visited[source] = true;
     path.push_back(source);
     if(source == destination) {
@@ -31,7 +30,7 @@ bool dfs(int source, int destination) {
     }
     for(auto it:adj[source]) {
         if(!visited[it]) {
-            if(dfs(it, destination)) return true;
+            if(dfs(it, destination, path)) return true;
         }
     }
     visited[source] = false;
@@ -43,8 +42,14 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     inputTree();
-    int source, destination;
-    cin >> source >> destination;
-    dfs(source, destination);
+    int t;
+    cin >> t;
+    while(t--) {
+        int source, destination;
+        cin >> source >> destination;
+        memset(visited, false, sizeof visited);
+        vi path;
+        dfs(source, destination, path);
+    }
     return 0;
 }
