@@ -24,8 +24,6 @@ bool dfs(int source, int destination, vi& path) {
     if(source == destination) {
         for(auto it:path) cout << it << " ";
         cout << "\n";
-        visited[source] = false;
-        path.pop_back();
         return true;
     }
     for(auto it:adj[source]) {
