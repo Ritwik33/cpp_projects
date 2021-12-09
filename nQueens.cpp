@@ -15,12 +15,12 @@ void show(vector<vector<char>>& board, int n) {
     }
 }
 
-bool isPossible(int row, int col, bool rowhash[], bool udHash[], bool ldHash[], int n) {
+bool isPossible(int row, int col, vector<bool>& rowhash, vector<bool>& udHash, vector<bool>& ldHash, int n) {
     if(rowhash[row] || udHash[n-1+row-col] || ldHash[row+col]) return false;
     return true;
 }
 
-bool solve(int col, vector<vector<char>>& board, bool rowHash[], bool udHash[], bool ldHash[], int n) {
+bool solve(int col, vector<vector<char>>& board, vector<bool>& rowHash, vector<bool>& udHash, vector<bool>& ldHash, int n) {
     if(col == n) {
         show(board, n);
         return true;
@@ -42,12 +42,9 @@ signed main() {
     int n;
     cin >> n;
     vector<vector<char>> board(n, vector<char>(n, '.'));
-    bool rowHash[n];
-    bool udHash[2*n - 2];
-    bool ldHash[2*n - 2];
-    memset(rowHash, false, sizeof rowHash);
-    memset(udHash, false, sizeof udHash);
-    memset(ldHash, false, sizeof ldHash);
+    vector<bool> rowHash(n, false);
+    vector<bool> udHash(n, false);
+    vector<bool> ldHash(n, false);
     solve(0, board, rowHash, udHash, ldHash, n);
     return 0;
 }
