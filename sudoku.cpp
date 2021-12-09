@@ -1,24 +1,32 @@
 #include<bits/stdc++.h>
 using namespace std;
+#define vi                                                         vector<int>
+#define vi2                                                        vector<vector<int>>
+#define rep(i, a, b)                                               for(int i = a;i<b;i++)
+#define repd(i, a)                                                 for(int i = a;i>=0;i--)
+#define setbits(x)                                                 __builtin_popcountll(x)
+#define FIO                                                        ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 
-bool isValid(vector<vector<char>>& board, int row, int col, char c) {
-    for(int i = 0;i<9;i++) {
-        if(board[row][i] == c) return false;
-        if(board[i][col] == c) return false;
-        if(board[3*(row/3) + i/3][3*(col/3) + i%3] == c) return false;
+char board[9][9];
+
+bool isValid(char val, int row, int col) {
+    rep(i, 0, 9) {
+        if(board[row][i] == val) return false;
+        if(board[i][col] == val) return false;
+        if(board[3*(row/3) + i/3][3*(col/3) + i%3] == val) return false;
     }
     return true;
 }
 
-bool solve(vector<vector<char>>& board) {
-    for(int row = 0;row<9;row++) {
-        for(int col = 0;col<9;col++) {
+bool solve() {
+    rep(row, 0, 9) {
+        rep(col, 0, 9) {
             if(board[row][col] == '.') {
-                for(char c = '1';c<='9';c++) {
-                    if(isValid(board, row, col, c)) {
-                        board[row][col] = c;
-                        if(solve(board)) return true;
-                        else board[row][col] = '.';
+                for(char val = '1';val<='9';val++) {
+                    if(isValid(val, row, col)) {
+                        board[row][col] = val;
+                        if(solve()) return true;
+                        board[row][col] = '.';
                     }
                 }
                 return false;
@@ -28,25 +36,18 @@ bool solve(vector<vector<char>>& board) {
     return true;
 }
 
-void disp(vector<vector<char>>& board) {
-    for(int i = 0;i<9;i++) {
-        for(int j = 0;j<9;j++) {
-            if(j == 3 || j == 6) cout << "  ";
-            cout << board[i][j] << "  ";
-        }
-        if(i==2 || i==5) cout << "\n\n";
-        cout << "\n\n";
-    }
-}
-
 int main() {
-    vector<vector<char>> board(9, vector<char>(9, '.'));
-    cout << "Please Enter a valid sudoku board:\n";
-    for(int i = 0;i<9;i++) {
-        for(int j = 0;j<9;j++) cin >> board[i][j];
+    FIO;
+    rep(i, 0, 9) {
+        rep(j, 0, 9) cin >> board[i][j];
     }
-    solve(board);
-    cout << "\n\nThe solution of the board is:\n\n";
-    disp(board);
+    solve();
+    rep(i, 0, 9) {
+        rep(j, 0, 9) {
+            cout << board[i][j];
+            j == 2 || j == 5 ? cout << "  ":cout << " ";
+        }
+        i == 2 || i == 5 ? cout << "\n\n" : cout << "\n";
+    }
     return 0;
 }
