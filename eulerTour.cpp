@@ -41,15 +41,11 @@ int lca(int u, int v) {
     int ind1, ind2;
     ind1 = firstOccurence[u];
     ind2 = firstOccurence[v];
-    int min = level[eulerTour[ind1+1]];
-    int lca = eulerTour[ind1+1];
-    rep(i, ind1+2, ind2) {
-        if(level[eulerTour[i]] < min) {
-            min = level[eulerTour[i]];
-            lca = eulerTour[i];
-        }
+    int highestNode = u;
+    rep(i, ind1 + 1, ind2 + 1) {
+        if(level[eulerTour[i]] < level[highestNode]) highestNode = eulerTour[i];
     }
-    return lca;
+    return highestNode;
 }
 
 int main() {
