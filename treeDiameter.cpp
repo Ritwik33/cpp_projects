@@ -8,10 +8,8 @@ using namespace std;
 #define FIO                                                        ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 
 vi adj[2*100005];
-void inputTree() {
-    int n;
-    cin >> n;
-    rep(i, 1, n) {
+void inputTree(int numOfNodes) {
+    rep(i, 1, numOfNodes) {
         int u, v;
         cin >> u >> v;
         adj[u].push_back(v);
@@ -20,29 +18,39 @@ void inputTree() {
 }
 
 int depth[2*100005];
-void dfs(int node, int par, int& dia) {
+void dfs(int& diameter, int node = 1, int parent = 0) {
     depth[node] = 0;
-    int fmax = -1, smax = -1;
     vi largestDepths;
     for(auto child:adj[node]) {
-        if(child == par) continue;
-        dfs(child, node, dia);
+        if(child == parent) continue;
+        dfs(diameter, child, node);
         depth[node] = max(depth[node], 1 + depth[child]);
         largestDepths.push_back(depth[child]);
     }
-    if(largestDepths.size() == 0) dia = max(dia, 0);
-    else if(largestDepths.size() == 1) dia = max(dia, depth[node]);
+    int lenOfLargestDepths = largestDepths.size();
+    if(lenOfLargestDepths == 0) diameter = max(diameter, 0);
+    else if(lenOfLargestDepths == 1) diameter = max(diameter, depth[node]);
     else {
         sort(largestDepths.begin(), largestDepths.end());
-        dia = max(dia, 2 + largestDepths[largestDepths.size() - 1] + largestDepths[largestDepths.size() - 2]);
-    }
+        int lastIndex = lenOfLargestDepths - 1;
+        int secondLastIndex = lenOfLargestDepths - 2;
+        int highestDepth = largestDepths[lastIndex];
+        int secondHighestDepth = largestDepths[secondLastIndex];
+        diameter = max(diameter, 2 + highestDepth + secondHighestDepth);
+    } 
+}
+
+void solve() {
+    int numOfNodes;
+    cin >> numOfNodes;
+    inputTree(numOfNodes);
+    int diameter = 0;
+    dfs(diameter);
+    cout << diameter << "\n";
 }
 
 int main() {
     FIO;
-    inputTree();
-    int dia = 0;
-    dfs(1, 0, dia);
-    cout << dia << "\n";
+    solve();
     return 0;
 }
