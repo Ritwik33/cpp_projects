@@ -48,7 +48,6 @@ void solve2() {
                 freq[1] += (n-2);
                 freq[2]++;
                 freq[(n+1)/2]++;
-
             } else {
                 freq[1] += (n-1);
                 freq[(n-2)/2]++;
