@@ -20,7 +20,7 @@ void solve() {
         rep(i, 0, n) {
             int height;
             cin >> height;
-            if(height > k) cnt++;
+            cnt += (height > k) ? 1 : 0;
         }
         cout << cnt << "\n";
     }
