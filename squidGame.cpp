@@ -16,14 +16,14 @@ void solve() {
     while(t--) {
         int n;
         cin >> n;
-        vi a(n);
-        for(auto &it:a) cin >> it;
-        sort(a.begin(), a.end());
-        int sum = 0;
-        rep(i, 1, n) {
-            sum += a[i];
+        int sum = 0, mini = INT_MAX; 
+        rep(i, 0, n) {
+            int temp;
+            cin >> temp;
+            mini = min(mini, temp);
+            sum += temp;
         }
-        cout << sum << "\n";
+        cout << sum - mini << "\n";
     }
 }
 
