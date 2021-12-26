@@ -17,9 +17,21 @@ void solve() {
         int n;
         cin >> n;
         vi arr(n);
-        for(auto &it:arr) cin >> it;
-        sort(arr.begin(), arr.end());
-        cout << max((arr[n-1] - arr[0])*arr[n-2], (arr[n-2] - arr[0])*arr[n-1]) << '\n';
+        int highest = INT_MIN, secondHighest = INT_MIN, least = INT_MAX, highestIndex;
+        rep(i, 0, n) {
+            cin >> arr[i];
+            if(arr[i] > highest) {
+                highest = arr[i];
+                highestIndex = i;
+            }
+            least = min(least, arr[i]);
+        }
+        rep(i, 0, n) {
+            if(i != highestIndex) {
+                secondHighest = max(secondHighest, arr[i]);
+            }
+        }
+        cout << max((highest - least)*secondHighest, (secondHighest - least)*highest) << '\n';
     }
 }
 
