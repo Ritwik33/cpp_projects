@@ -8,10 +8,14 @@ using namespace std;
 #define rep(i, a, b)                                               for(int i = a;i<b;i++)
 #define repd(i, a)                                                 for(int i = a;i>=0;i--)
 #define setbits(x)                                                 __builtin_popcountll(x)
-#define FIO                                                        ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+#define FIO                                                        ios_base::sync_with_stdio(false); cin.tie(NULL);
+
+void solve() {
+
+}
 
 signed main() {
     FIO;
-
+    solve();
     return 0;
 }
