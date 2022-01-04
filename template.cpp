@@ -9,10 +9,10 @@ using namespace std;
 #define repd(i, a)                                                 for(int i = a;i>=0;i--)
 #define setbits(x)                                                 __builtin_popcountll(x)
 #define FIO                                                        ios_base::sync_with_stdio(false); cin.tie(NULL);
-#define w(x)                                                       int x; cin >> x; while(x--)
+#define w(t)                                                       int t; cin >> t; while(t--)
 
 void solve() {
-   w(x) {
+   w(t) {
 
    }
 }
