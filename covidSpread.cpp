@@ -19,16 +19,10 @@ void solve() {
        if(d <= 10) {
            infected = pow(2, d);
        } else {
-           int index = d - 10;
-           if(index > 646) {
-               index = 646;
-           }
-           infected = 1024*pow(3, index);
+           infected = 1024*pow(3, d-10);
        }
-       if(infected > pow(10, 8) || infected > n) {
-           infected = n;
-       }
-       cout << infected << '\n';
+       if(infected > INT_MAX || infected < INT_MIN || infected > n) infected = n;
+       cout << infected << '\n'; 
    }
 }
 
