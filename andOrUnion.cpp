@@ -15,34 +15,30 @@ void solve() {
    w(t) {
        int n;
        cin >> n;
-       int a[n];
-       rep(i, 0, n) cin >> a[i];
-       sort(a, a + n);
-       int maxi = a[n-1] & a[n-2];
-       int temp = maxi;
-       int cnt = 0;
-       while(temp) {
-           if(!(temp & 1)) {
-               int val1 = 0, val2 = 0;
-               rep(i, 0, n) {
-                   if(a[i] & (1 << cnt)) {
-                       val1 = a[i];
-                       break;
-                   }
+       vi a(n);
+       vi bits[30];
+       rep(i, 0, n) {
+           cin >> a[i];
+           rep(j, 0, 30) {
+               if(a[i] & (1 << j)) {
+                   bits[j].pb(a[i]);
                }
-               rep(i, 0, n) {
-                   if((a[i] & (1 << cnt)) && (a[i] != val1)) {
-                       val2 = a[i];
-                       break;
-                   }
-               }
-               int fact = val1 & val2;
-               maxi |= fact;
            }
-           cnt++;
-           temp >>= 1;
        }
-       cout << maxi << '\n';
+       sort(a.begin(), a.end());
+       int ans = a[n-1] & a[n-2];
+       int clone = ans;
+       int cnt = 0;
+       while(clone) {
+           if(!(clone & (1 << cnt))) {
+               if(bits[cnt].size() >= 2) {
+                   ans |= (1 << cnt);
+               }
+           }
+           clone >>= 1;
+           cnt++;
+       }
+       cout << ans << '\n';
    }
 }
 
