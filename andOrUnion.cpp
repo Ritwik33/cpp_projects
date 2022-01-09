@@ -16,27 +16,20 @@ void solve() {
        int n;
        cin >> n;
        vi a(n);
-       vi bits[30];
+       vi bits(30);
        rep(i, 0, n) {
            cin >> a[i];
            rep(j, 0, 30) {
                if(a[i] & (1 << j)) {
-                   bits[j].pb(a[i]);
+                   bits[j]++;
                }
            }
        }
-       sort(a.begin(), a.end());
-       int ans = a[n-1] & a[n-2];
-       int clone = ans;
-       int cnt = 0;
-       while(clone) {
-           if(!(clone & (1 << cnt))) {
-               if(bits[cnt].size() >= 2) {
-                   ans |= (1 << cnt);
-               }
+       int ans = 0;
+       rep(i, 0, 30) {
+           if(bits[i] >= 2) {
+               ans |= (1 << i);
            }
-           clone >>= 1;
-           cnt++;
        }
        cout << ans << '\n';
    }
