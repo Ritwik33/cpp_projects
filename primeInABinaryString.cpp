@@ -32,7 +32,7 @@ bool generateSubstrings(string s) {
         rep(j, i, n) {
             ans += s[j];
             int val = 0;
-            rep(k, 0, ans.size()) {
+            for(int k = 0;k<ans.size();k++) {
                 val += (ans[k] - '0')*pow(2, ans.size()-k-1);
             }
             if(isPrime(val)) return true;
@@ -42,6 +42,7 @@ bool generateSubstrings(string s) {
 }
 
 void solve() {
+   prepareSeive();
    w(t) {
        string s;
        cin >> s;
@@ -51,7 +52,6 @@ void solve() {
 
 signed main() {
     FIO;
-    prepareSeive();
     solve();
     return 0;
 }
