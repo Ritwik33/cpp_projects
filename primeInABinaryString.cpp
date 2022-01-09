@@ -11,8 +11,8 @@ using namespace std;
 #define FIO                                                        ios_base::sync_with_stdio(false); cin.tie(NULL);
 #define w(t)                                                       int t; cin >> t; while(t--)
 
-int n = 100000;
-int seive[100005];
+int n = 3*100000;
+int seive[3*100005];
 void prepareSeive() {
     for(int i = 2;i<=n;i++) seive[i] = 1;
     for(int i = 0;i*i<=n;i++) {
@@ -28,14 +28,11 @@ bool isPrime(int val) {
 bool generateSubstrings(string s) {
     int n = s.size();
     rep(i, 0, n) {
-        string ans = "";
+        int val = 0;
         rep(j, i, n) {
-            ans += s[j];
-            int val = 0;
-            for(int k = 0;k<ans.size();k++) {
-                val += (ans[k] - '0')*pow(2, ans.size()-k-1);
-            }
+            val += s[j] - '0';
             if(isPrime(val)) return true;
+            val *= 2;
         }
     }
     return false;
@@ -46,7 +43,7 @@ void solve() {
    w(t) {
        string s;
        cin >> s;
-       generateSubstrings(s) == true ? (cout << "YES\n") : (cout << "NO\n");
+       generateSubstrings(s) == true ? (cout << "Yes\n") : (cout << "No\n");
    }
 }
 
