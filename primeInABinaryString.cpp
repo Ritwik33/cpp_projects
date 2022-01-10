@@ -11,39 +11,26 @@ using namespace std;
 #define FIO                                                        ios_base::sync_with_stdio(false); cin.tie(NULL);
 #define w(t)                                                       int t; cin >> t; while(t--)
 
-int n = 3*100000;
-int seive[3*100005];
-void prepareSeive() {
-    for(int i = 2;i<=n;i++) seive[i] = 1;
-    for(int i = 0;i*i<=n;i++) {
-        if(seive[i] == 0) continue;
-        for(int j = i*i;j<=n;j += i) seive[j] = 0;
-    }
-}
-
-bool isPrime(int val) {
-    return seive[val];
-}
-
-bool generateSubstrings(string s) {
-    int n = s.size();
-    rep(i, 0, n) {
-        int val = 0;
-        rep(j, i, n) {
-            val += s[j] - '0';
-            if(isPrime(val)) return true;
-            val *= 2;
-        }
-    }
-    return false;
-}
-
 void solve() {
-   prepareSeive();
    w(t) {
        string s;
        cin >> s;
-       generateSubstrings(s) == true ? (cout << "Yes\n") : (cout << "No\n");
+       int n = s.size();
+       if(n == 1) {
+           cout << "No\n";
+           continue;
+       }
+       string prime1 = "10", prime2 = "11";
+       int index1, index2;
+       index1 = s.find(prime1);
+       index2 = s.find(prime2);
+       if(index1 > n-2 || index1 < 0) index1 = -1;
+       if(index2 > n-2 || index2 < 0) index2 = -1;
+       if(index1 != -1 || index2 != -1) {
+           cout << "Yes\n";
+       } else {
+           cout << "No\n";
+       }
    }
 }
 
