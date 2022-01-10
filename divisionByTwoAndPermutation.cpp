@@ -26,15 +26,13 @@ void solve() {
                st.erase(a[i]);
            } else {
                int temp = a[i];
-               while(temp != 1) {
+               while(temp) {
                    temp /= 2;
                    if(st.count(temp)) {
                        st.erase(temp);
                        a[i] = temp;
                        break;
                    }
-                   a[i] = 1;
-                   st.erase(1);
                }
            }
        }
