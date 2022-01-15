@@ -11,14 +11,10 @@ using namespace std;
 #define FIO                                                        ios_base::sync_with_stdio(false); cin.tie(NULL);
 #define w(t)                                                       int t; cin >> t; while(t--)
 
-void solve() {
-   w(t) {
-
-   }
-}
-
-signed main() {
+int32_t main() {
     FIO;
-    solve();
+    w(t) {
+
+    }
     return 0;
 }
