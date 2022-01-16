@@ -11,41 +11,23 @@ using namespace std;
 #define FIO                                                        ios_base::sync_with_stdio(false); cin.tie(NULL);
 #define w(t)                                                       int t; cin >> t; while(t--)
 
-void solve() {
-   w(t) {
-       int n;
-       cin >> n;
-       vvi boxes(3, vi(3));
-       rep(i, 0, 3) {
-           rep(j, 0, 3) cin >> boxes[i][j];
-       }
-       int ans = 0;
-       while(boxes[0][0] != n or boxes[1][1] != n or boxes[2][2] != n) {
-           int mini = min(boxes[0][1], boxes[1][0]);
-           ans = mini;
-           boxes[0][0] += mini;
-           boxes[1][1] += mini;
-           boxes[0][1] -= mini;
-           boxes[1][0] -= mini;
-           mini = min(boxes[0][2], boxes[2][0]);
-           ans += mini;
-           boxes[0][0] += mini;
-           boxes[2][2] += mini;
-           boxes[0][2] -= mini;
-           boxes[2][0] -= mini;
-           mini = min(boxes[1][2], boxes[2][1]);
-           ans += mini;
-           boxes[1][1] += mini;
-           boxes[2][2] += mini;
-           boxes[1][2] -= mini;
-           boxes[2][1] -= mini;
-       }
-       cout << ans << '\n';
-   }
-}
-
-signed main() {
+int32_t main() {
     FIO;
-    solve();
+    w(t) {
+        int n; cin >> n;
+        int sum1 = 0, sum2 = 0;
+        rep(i, 0, 3) {
+            rep(j, 0, 3) {
+                int temp; cin >> temp;
+                if((i == 0 and j == 1) or (i == 0 and j == 2) or (i == 1 and j == 2)) {
+                    sum1 += temp;
+                }
+                if((i == 1 and j == 0) or (i == 2 and j == 0) or (i == 2 and j == 1)) {
+                    sum2 += temp;
+                }
+            }
+        }
+        cout << max(sum1, sum2) << '\n';
+    }
     return 0;
 }
