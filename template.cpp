@@ -1,7 +1,9 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+#define endl                                                       '\n'
 #define inf                                                        1e18
+#define mod                                                        1000000007
 #define int                                                        long long
 #define vi                                                         vector<int>
 #define vvi                                                        vector<vector<int>>
@@ -10,17 +12,25 @@ using namespace std;
 #define rep(i, a, b)                                               for(int i = a;i<b;i++)
 #define repd(i, a)                                                 for(int i = a;i>=0;i--)
 #define setbits(x)                                                 __builtin_popcountll(x)
-#define w(t)                                                       int t; cin >> t; while(t--)
+#define ps(x, y)                                                   fixed << setprecision(y) << x
 #define FIO                                                        ios_base::sync_with_stdio(false); cin.tie(NULL);
 
 void solve() {
-    w(t) {
 
-    }
- }
+}
 
 int32_t main() {
-    FIO;
-    solve();
-    return 0;
+	FIO;
+
+#ifndef ONLINE_JUDGE
+	freopen("input.txt", "r", stdin);
+	freopen("output.txt", "w", stdout);
+#endif
+
+	int t = 1;
+	cin >> t;
+	while (t--) {
+		solve();
+	}
+	return 0;
 }
