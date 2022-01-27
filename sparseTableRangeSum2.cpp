@@ -13,36 +13,36 @@ using namespace std;
 #define repd(i, a)                                                 for(int i = a;i>=0;i--)
 #define setbits(x)                                                 __builtin_popcountll(x)
 #define ps(x, y)                                                   fixed << setprecision(y) << x
-#define w(q) 	                                                   int q; cin >> q; while(q--)
+#define w(q)                                                       int q; cin >> q; while(q--)
 #define FIO                                                        ios_base::sync_with_stdio(false); cin.tie(NULL);
 
-int n;
-int a[100005];
-int dp[100005][17];
+int n, x[2 * 100005], dp[2 * 100005][18];
 
 void precompute() {
-	rep (j, 1, 17) {
-		rep (i, 0, n - (1 << j) + 1) {
-			dp[i][j] = dp[i][j - 1] + dp[i + 1 << (j - 1)][j - 1];
+	for (int j = 1; j < 18; j++) {
+		for (int i = 0; i <= n - (1 << j); i++) {
+			dp[i][j] = dp[i][j - 1] + dp[i + (1 << (j - 1))][j - 1];
 		}
 	}
 }
 
 void solve() {
-	cin >> n;
-	rep(i, 0, n) {
-		cin >> a[i];
-		dp[i][0] = a[i];
+	int q;
+	cin >> n >> q;
+	for (int i = 0; i < n; i++) {
+		cin >> x[i];
+		dp[i][0] = x[i];
 	}
 	precompute();
-	w(q) {
+	while (q--) {
 		int l, r;
 		cin >> l >> r;
+		l--, r--;
 		int i = l, ans = 0, len = r - l + 1;
-		repd (j, 17) {
+		for (int j = 17; j >= 0; j--) {
 			if ((len >> j) & 1) {
 				ans += dp[i][j];
-				i += 1 << j;
+				i += (1 << j);
 			}
 		}
 		cout << ans << endl;
