@@ -20,7 +20,7 @@ int dp[100005][17], a[100005], n;
 void precompute() {
 	rep(j, 1, 17) {
 		rep(i, (1<<j) - 1, n) {
-			dp[i][j] = dp[i][j - 1] + dp[i - 1 << (j - 1)][j - 1];
+			dp[i][j] = dp[i][j - 1] + dp[i - (1 << (j - 1))][j - 1];
 		}
 	}
 }
