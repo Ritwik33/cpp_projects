@@ -21,7 +21,7 @@ int n, a[100005], dp[100005][17];
 void precompute() {
 	rep(j, 1, 17) {
 		rep(i, 0, n - (1 << j) + 1) {
-			dp[i][j] = min(dp[i][j - 1], dp[i + 1 << (j - 1)][j - 1]);
+			dp[i][j] = min(dp[i][j - 1], dp[i + (1 << (j - 1))][j - 1]);
 		}
 	}
 }
