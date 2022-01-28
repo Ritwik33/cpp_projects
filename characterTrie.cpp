@@ -16,8 +16,6 @@ using namespace std;
 #define w(q)                                                       int q; cin >> q; while(q--)
 #define FIO                                                        ios_base::sync_with_stdio(false); cin.tie(NULL);
 
-vector<char> word;
-
 class node {
 public:
 	int pre, ends, num;
@@ -29,6 +27,7 @@ public:
 };
 
 class trie {
+	vector<char> word;
 public:
 	node *root;
 	trie() {
@@ -96,24 +95,37 @@ public:
 		return true;
 	}
 
+	bool isLeaf(node *p) {
+		return p -> ends == p -> pre;
+	}
+
+	void printWord() {
+		for (char letter : word) cout << letter;
+		cout << endl;
+	}
+
 	void printTrie(node *cur) {
-		if (cur -> ends == 1 and cur -> pre == 1) {
-			for (char ch : word) cout << ch;
-			cout << endl;
-			cur -> num--;
-			return;
+		if (isLeaf(cur)) {
+			while (cur -> num--) {
+				printWord();
+			}
 		}
-		for (auto it : (cur -> child)) {
-			word.push_back(it.first);
-			printTrie(it.second);
+		for (auto it : cur -> child) {
+			char letter = it.first;
+			word.push_back(letter);
+			node *nextNode = it.second;
+			printTrie(nextNode);
 			word.pop_back();
 			if (cur -> num >= 1) {
 				while (cur -> num--) {
-					for (char ch : word) cout << ch;
-					cout << endl;
+					printWord();
 				}
 			}
 		}
+	}
+
+	void displayTrie() {
+		printTrie(root);
 	}
 };
 
@@ -127,7 +139,11 @@ void solve() {
 	t.insert("bye");
 	t.insert("by");
 	t.insert("their");
-	t.printTrie(t.root);
+	t.insert("their");
+	t.insert("their");
+	t.insert("bye");
+	t.insert("by");
+	t.displayTrie();
 }
 
 int32_t main() {
