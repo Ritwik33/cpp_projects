@@ -16,14 +16,14 @@ using namespace std;
 #define w(q)                                                       int q; cin >> q; while(q--)
 #define FIO                                                        ios_base::sync_with_stdio(false); cin.tie(NULL);
 
-deque<char> dq;
+vector<char> word;
 
 class node {
 public:
-	int pre, ends;
+	int pre, ends, num;
 	unordered_map<char, node*> child;
 	node() {
-		pre = ends = 0;
+		pre = ends = num = 0;
 		child = {};
 	}
 };
@@ -42,7 +42,7 @@ public:
 			if (cur -> child[letter] == NULL) cur -> child[letter] = new node();
 			cur = cur -> child[letter];
 		}
-		cur -> pre++, cur -> ends++;
+		cur -> pre++, cur -> ends++, cur -> num++;
 	}
 
 	int occurences(const string& word) {
@@ -70,7 +70,7 @@ public:
 			cur -> pre--;
 			cur = cur -> child[letter];
 		}
-		cur -> pre--, cur -> ends--;
+		cur -> pre--, cur -> ends--, cur -> num--;
 		return true;
 	}
 
@@ -78,7 +78,7 @@ public:
 		cur -> pre--;
 		int n = word.length();
 		if (i == n - 1) {
-			cur -> ends--;
+			cur -> ends--, cur -> num--;
 		} else {
 			cur -> child[word[i + 1]] = del_aux(cur -> child[word[i + 1]], word, i + 1);
 			if (cur -> child[word[i + 1]] == NULL) (cur -> child).erase(word[i + 1]);
@@ -97,19 +97,37 @@ public:
 	}
 
 	void printTrie(node *cur) {
-		if (cur -> ends) {
+		if (cur -> ends == 1 and cur -> pre == 1) {
+			for (char ch : word) cout << ch;
 			cout << endl;
+			cur -> num--;
 			return;
 		}
 		for (auto it : (cur -> child)) {
-			cout << it.first;
+			word.push_back(it.first);
 			printTrie(it.second);
+			word.pop_back();
+			if (cur -> num >= 1) {
+				while (cur -> num--) {
+					for (char ch : word) cout << ch;
+					cout << endl;
+				}
+			}
 		}
 	}
 };
 
 void solve() {
 	trie t;
+	t.insert("the");
+	t.insert("a");
+	t.insert("there");
+	t.insert("answer");
+	t.insert("any");
+	t.insert("bye");
+	t.insert("by");
+	t.insert("their");
+	t.printTrie(t.root);
 }
 
 int32_t main() {
