@@ -32,17 +32,14 @@ bool isPossible(int l, int r, int d) {
 }
 
 int binarySearch(int t, int d) {
-	int k = lower_bound(a, a + n, t) - a;
-	if (a[k] != t) {
-		k = k - 1;
-	}
-	int mid, low = 0, high = k;
+	int k = upper_bound(a, a + n, t) - a - 1;
+	int low = 0, high = k - 1, ans = k;
 	while (low <= high) {
-		mid = low + (high - low) / 2;
-		if (isPossible(mid, k - 1, d)) high = mid - 1;
+		int mid = low + (high - low) / 2;
+		if (isPossible(mid, k - 1, d)) ans = mid, high = mid - 1;
 		else low = mid + 1;
 	}
-	return mid;
+	return ans;
 }
 
 void solve() {
