@@ -13,6 +13,7 @@ using namespace std;
 #define repd(i, a)                                                 for(int i = a;i>=0;i--)
 #define setbits(x)                                                 __builtin_popcountll(x)
 #define ps(x, y)                                                   fixed << setprecision(y) << x
+#define w(q)                                                       int q; cin >> q; while(q--)
 #define FIO                                                        ios_base::sync_with_stdio(false); cin.tie(NULL);
 
 void solve() {
@@ -21,12 +22,6 @@ void solve() {
 
 int32_t main() {
 	FIO;
-
-#ifndef ONLINE_JUDGE
-	freopen("input.txt", "r", stdin);
-	freopen("output.txt", "w", stdout);
-#endif
-
 	int t = 1;
 	cin >> t;
 	while (t--) {
