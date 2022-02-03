@@ -17,7 +17,7 @@ using namespace std;
 #define FIO                                                        ios_base::sync_with_stdio(false); cin.tie(NULL);
 
 void solve() {
-
+	
 }
 
 int32_t main() {
