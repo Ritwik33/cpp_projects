@@ -6,6 +6,12 @@ using namespace std;
 #define mod                                                        1000000007
 #define int                                                        long long
 #define vi                                                         vector<int>
+#define pii                                                        pair<int, int>
+#define ff                                                         first
+#define ss                                                         second
+#define mii                                                        map<int, int>
+#define umii                                                       unordered_map<int, int>
+#define mp 														   make_pair
 #define vvi                                                        vector<vector<int>>
 #define pb(x)                                                      push_back(x)
 #define ppb                                                        pop_back()
@@ -14,33 +20,26 @@ using namespace std;
 #define setbits(x)                                                 __builtin_popcountll(x)
 #define ps(x, y)                                                   fixed << setprecision(y) << x
 #define w(q)                                                       int q; cin >> q; while(q--)
-#define FIO                                                        ios_base::sync_with_stdio(false); cin.tie(NULL);
-
-class strength {
-public:
-	int x, y;
-	bool operator<(const strength& s) {
-		return x < s.x or (x == s.x and y > s.y);
-	}
-};
+#define FIO                                                        ios_base::sync_with_stdio(false); cin.tie(NULL)
 
 void solve() {
-	int s, n; cin >> s >> n;
-	vector<strength> strengths(n);
-	rep(i, 0, n) {
-		cin >> strengths[i].x >> strengths[i].y;
-	}
-	sort(strengths.begin(), strengths.end());
-	int total = s;
-	int flag = 1;
-	for (auto it : strengths) {
-		if (it.x > total) {
-			flag = 0;
-			break;
+	int n, t; cin >> n >> t;
+	int deno[n + 1];
+	rep(i, 1, n + 1) cin >> deno[i];
+	int dp[t + 1][n + 1] = {0};
+	for (int i = 1; i <= t; i++) {
+		for (int j = 1; j <= n; j++) {
+			dp[i][j] = INT_MIN;
+			if (j - 1 >= 1 and dp[i][j - 1] != -1) {
+				dp[i][j] = max(dp[i][j], dp[i][j - 1]);
+				if (i - deno[j] >= 0 and dp[i - deno[j]][j - 1] != -1) {
+					dp[i][j] = max(dp[i][j], dp[i - deno[j]][j - 1]);
+				}
+			}
+			if (dp[i][j] == INT_MIN) dp[i][j] = -1;
 		}
-		total += it.y;
 	}
-	flag ? cout << "YES" << endl : cout << "NO" << endl;
+	cout << dp[t][n] << endl;
 }
 
 int32_t main() {
