@@ -1,3 +1,5 @@
+// https://codeforces.com/problemset/problem/1221/D
+
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -24,23 +26,23 @@ using namespace std;
 
 void solve() {
 	int n; cin >> n;
-	int a[n], b[n];
-	rep(i, 0, n) cin >> a[i] >> b[i];
-	int dp[n][3];
-	dp[0][0] = 0;
-	dp[0][1] = b[0];
-	dp[0][2] = 2 * b[0];
-	for (int i = 1; i < n; i++) {
-		for (int j = 0; j < 3; j++) {
-			dp[i][j] = INT_MAX;
-			for (int l = 0; l < 3; l++) {
+	int a[n + 1], b[n + 1];
+	rep(i, 1, n + 1) cin >> a[i] >> b[i];
+	int dp[n + 1][3];
+	dp[1][0] = 0;
+	dp[1][1] = b[1];
+	dp[1][2] = 2 * b[1];
+	for (int i = 2; i <= n; i++) {
+		for (int j = 0; j <= 2; j++) {
+			dp[i][j] = inf;
+			for (int l = 0; l <= 2; l++) {
 				if (a[i - 1] + l != a[i] + j) {
 					dp[i][j] = min(dp[i][j], j * b[i] + dp[i - 1][l]);
 				}
 			}
 		}
 	}
-	cout << min(dp[n - 1][0], min(dp[n - 1][1], dp[n - 1][2])) << endl;
+	cout << min({dp[n][0], dp[n][1], dp[n][2]}) << endl;
 }
 
 int32_t main() {
