@@ -24,8 +24,9 @@ using namespace std;
 
 void solve() {
 	int n, x; cin >> n >> x;
-	int coins[n];
+	vi coins(n);
 	rep(i, 0, n) cin >> coins[i];
+	sort(coins.begin(), coins.end());
 	int dp[x + 1][n] = {0};
 	for (int i = 0; i <= x; i++) {
 		for (int j = 0; j < n; j++) {
