@@ -26,17 +26,23 @@ void solve() {
 	int n, t; cin >> n >> t;
 	int deno[n + 1];
 	rep(i, 1, n + 1) cin >> deno[i];
-	int dp[t + 1][n + 1] = {0};
-	for (int i = 1; i <= t; i++) {
+	int dp[t + 1][n + 1];
+	for (int i = 0; i <= t; i++) {
 		for (int j = 1; j <= n; j++) {
-			dp[i][j] = INT_MIN;
-			if (j - 1 >= 1 and dp[i][j - 1] != -1) {
-				dp[i][j] = max(dp[i][j], dp[i][j - 1]);
-				if (i - deno[j] >= 0 and dp[i - deno[j]][j - 1] != -1) {
-					dp[i][j] = max(dp[i][j], dp[i - deno[j]][j - 1]);
+			dp[i][j] = INT_MAX;
+			if (j - 1 >= 1) {
+				if (dp[i][j - 1] != -1) {
+					dp[i][j] = min(dp[i][j], dp[i][j - 1]);
+				}
+				if (i - deno[j] >= 0) {
+					int ans = 1;
+					if (dp[i - deno[j]][j - 1] != -1) {
+						dp[i][j] = min(dp[i][j], 1 + dp[i - deno[j]][j - 1]);
+					}
+					dp[i][j] = min(dp[i][j], ans);
 				}
 			}
-			if (dp[i][j] == INT_MIN) dp[i][j] = -1;
+			if (dp[i][j] == INT_MAX) dp[i][j] = -1;
 		}
 	}
 	cout << dp[t][n] << endl;
